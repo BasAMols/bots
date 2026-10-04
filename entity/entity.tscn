@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://cu44slpamiapy"]
+
+[ext_resource type="PackedScene" uid="uid://clefxt3kf2ius" path="res://assets/circle/circle.tscn" id="1_bclhr"]
+[ext_resource type="Script" uid="uid://cxj4is46gtftd" path="res://entity/entity.gd" id="1_glcaf"]
+[ext_resource type="Script" uid="uid://br3uttl142pjs" path="res://entity/visual.gd" id="2_jspmv"]
+[ext_resource type="Script" uid="uid://hs02r42wyniv" path="res://entity/physics.gd" id="4_s1kue"]
+[ext_resource type="Script" uid="uid://c3rojy2e1bhmg" path="res://entity/programming.gd" id="5_jspmv"]
+
+[sub_resource type="Gradient" id="Gradient_bclhr"]
+resource_local_to_scene = true
+offsets = PackedFloat32Array(0, 0.7, 0.7)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mckvm"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_bclhr")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uud5k"]
+radius = 32.0
+
+[node name="entity" type="Node2D" unique_id=1048178603]
+script = ExtResource("1_glcaf")
+
+[node name="visual" type="Node2D" parent="." unique_id=1820654354 node_paths=PackedStringArray("asset")]
+script = ExtResource("2_jspmv")
+asset = NodePath("asset")
+
+[node name="asset" parent="visual" unique_id=1721078887 instance=ExtResource("1_bclhr")]
+scale = Vector2(0.25, 0.25)
+texture = SubResource("GradientTexture2D_mckvm")
+
+[node name="physics" type="Node2D" parent="." unique_id=406622978 node_paths=PackedStringArray("body")]
+script = ExtResource("4_s1kue")
+body = NodePath("CharacterBody2D")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="physics" unique_id=783044173]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="physics/CharacterBody2D" unique_id=1460238231]
+shape = SubResource("CircleShape2D_uud5k")
+
+[node name="programming" type="Node2D" parent="." unique_id=2004277284]
+script = ExtResource("5_jspmv")
